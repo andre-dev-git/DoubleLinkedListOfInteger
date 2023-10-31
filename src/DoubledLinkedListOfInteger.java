@@ -3,6 +3,12 @@ public class DoubledLinkedListOfInteger {
     Node tail;
     int size;
 
+    public DoubledLinkedListOfInteger() {
+        this.head = null;
+        this.tail = null;
+        this.size = 0;
+    }
+
     private class Node {
         int data;
         Node prev;
@@ -47,5 +53,5 @@ public class DoubledLinkedListOfInteger {
         }
         size++;
     }
-    
+
 }
