@@ -54,4 +54,8 @@ public class DoubledLinkedListOfInteger {
         size++;
     }
 
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
 }
