@@ -73,4 +73,17 @@ public class DoubledLinkedListOfInteger {
         return false;
     }
 
+    public int indexOf(Integer element) {
+        Node current = head;
+        int index = 0;
+        while (current != null) {
+            if (current.data.equals(element)) {
+                return index;
+            }
+            current = current.next;
+            index++;
+        }
+        return -1; 
+    }
+
 }
