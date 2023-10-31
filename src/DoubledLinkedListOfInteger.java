@@ -112,4 +112,19 @@ public class DoubledLinkedListOfInteger {
         }
     }
 
+    public Integer set(int index, Integer e) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+        }
+
+        Node current = head;
+        for (int i = 0; i < index; i++) {
+            current = current.next;
+        }
+
+        Integer oldValue = current.data;
+        current.data = e;
+        return oldValue;
+    }
+
 }
