@@ -62,4 +62,15 @@ public class DoubledLinkedListOfInteger {
         return size;
     }
 
+    public boolean contains(Integer element) {
+        Node current = head;
+        while (current != null) {
+            if (current.data.equals(element)) {
+                return true;
+            }
+            current = current.next;
+        }
+        return false;
+    }
+
 }
