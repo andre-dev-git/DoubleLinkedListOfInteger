@@ -58,4 +58,8 @@ public class DoubledLinkedListOfInteger {
         return size == 0;
     }
 
+    public int size() {
+        return size;
+    }
+
 }
