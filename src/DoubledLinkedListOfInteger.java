@@ -86,4 +86,10 @@ public class DoubledLinkedListOfInteger {
         return -1; 
     }
 
+    public void clear() {
+        head = null;
+        tail = null;
+        size = 0;
+    }
+
 }
