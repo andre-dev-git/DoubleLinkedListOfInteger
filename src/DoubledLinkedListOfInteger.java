@@ -92,4 +92,24 @@ public class DoubledLinkedListOfInteger {
         size = 0;
     }
 
+    public Integer get(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+        }
+
+        if (index <= size / 2) {
+            Node current = head;
+            for (int i = 0; i < index; i++) {
+                current = current.next;
+            }
+            return current.data;
+        } else {
+            Node current = tail;
+            for (int i = size - 1; i > index; i--) {
+                current = current.prev;
+            }
+            return current.data;
+        }
+    }
+
 }
