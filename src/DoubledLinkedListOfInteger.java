@@ -10,18 +10,18 @@ public class DoubledLinkedListOfInteger {
     }
 
     private class Node {
-        int data;
+        Integer data;
         Node prev;
         Node next;
 
-        public Node(int data) {
+        public Node(Integer data) {
             this.data = data;
             this.prev = null;
             this.next = null;
         }
     } 
 
-    public void add(int index, int data) {
+    public void add(int index, Integer data) {
         if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException("Invalid index");
         }
