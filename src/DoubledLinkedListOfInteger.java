@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class DoubledLinkedListOfInteger {
     Node head;
     Node tail;
@@ -125,6 +127,135 @@ public class DoubledLinkedListOfInteger {
         Integer oldValue = current.data;
         current.data = e;
         return oldValue;
+    }
+
+    public int removeByIndex(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+        }
+
+        if (index == 0) {
+            Integer removedValue = head.data;
+            head = head.next;
+            if (head != null) {
+                head.prev = null;
+            } else {
+                tail = null;
+            }
+            size--;
+            return removedValue;
+        } else if (index == size - 1) {
+            Integer removedValue = tail.data;
+            tail = tail.prev;
+            if (tail != null) {
+                tail.next = null;
+            } else {
+                head = null;
+            }
+            size--;
+            return removedValue;
+        } else {
+            Node current = head;
+            for (int i = 0; i < index; i++) {
+                current = current.next;
+            }
+            Integer removedValue = current.data;
+            current.prev.next = current.next;
+            current.next.prev = current.prev;
+            size--;
+            return removedValue;
+        }
+    }
+
+    public boolean removeAll(Integer element) {
+        boolean removed = false;
+        Node current = head;
+        while (current != null) {
+            if (current.data.equals(element)) {
+                if (current == head) {
+                    head = current.next;
+                    if (head != null) {
+                        head.prev = null;
+                    } else {
+                        tail = null;
+                    }
+                } else if (current == tail) {
+                    tail = current.prev;
+                    tail.next = null;
+                } else {
+                    current.prev.next = current.next;
+                    current.next.prev = current.prev;
+                }
+                size--;
+                removed = true;
+            }
+            current = current.next;
+        }
+        return removed;
+    }
+
+    public int[] subList(int fromIndex, int toIndex) {
+        if (fromIndex < 0 || toIndex > size || fromIndex > toIndex) {
+            throw new IndexOutOfBoundsException("Invalid fromIndex or toIndex");
+        }
+
+        int[] subArray = new int[toIndex - fromIndex];
+        Node current = head;
+        for (int i = 0; i < toIndex; i++) {
+            if (i >= fromIndex) {
+                subArray[i - fromIndex] = current.data;
+            }
+            current = current.next;
+        }
+        return subArray;
+    }
+
+    public void sort() {
+        Integer[] arr = new Integer[size];
+        Node current = head;
+        for (int i = 0; i < size; i++) {
+            arr[i] = current.data;
+            current = current.next;
+        }
+        Arrays.sort(arr, (a, b) -> b - a);
+
+        current = head;
+        for (int i = 0; i < size; i++) {
+            current.data = arr[i];
+            current = current.next;
+        }
+    }
+
+    public void reverse() {
+        if (size <= 1) {
+            return;
+        }
+
+        Node current = head;
+        Node temp = null;
+
+        Node tempNode = head;
+        head = tail;
+        tail = tempNode;
+
+        while (current != null) {
+            temp = current.prev;
+            current.prev = current.next;
+            current.next = temp;
+            current = current.prev;
+        }
+    }
+
+    public int contaOcorrencias(Integer element) {
+        int count = 0;
+        Node current = head;
+        while (current != null) {
+            if (current.data.equals(element)) {
+                count++;
+            }
+            current = current.next;
+        }
+        return count;
     }
 
 }
