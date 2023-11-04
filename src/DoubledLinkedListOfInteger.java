@@ -23,6 +23,12 @@ public class DoubledLinkedListOfInteger {
         }
     } 
 
+
+    //Método que criei para termos a possibilidade de adicionar o
+    public void add(Integer data){
+        this.add(size, data);
+    }
+
     public void add(int index, Integer data) {
         if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException("Invalid index");
