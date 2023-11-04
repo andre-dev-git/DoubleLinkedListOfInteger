@@ -33,9 +33,9 @@ public class DoubledLinkedListOfInteger {
         if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException("Invalid index");
         }
-
+    
         Node newNode = new Node(data);
-
+    
         if (index == 0) {
             if (head == null) {
                 head = newNode;
@@ -49,6 +49,15 @@ public class DoubledLinkedListOfInteger {
             tail.next = newNode;
             newNode.prev = tail;
             tail = newNode;
+        } else if (index >= size / 2) {
+            Node current = tail;
+            for (int i = size - 1; i > index; i--) {
+                current = current.prev;
+            }
+            newNode.next = current;
+            newNode.prev = current.prev;
+            current.prev.next = newNode;
+            current.prev = newNode;
         } else {
             Node current = head;
             for (int i = 0; i < index - 1; i++) {
@@ -61,6 +70,7 @@ public class DoubledLinkedListOfInteger {
         }
         size++;
     }
+    
 
     public boolean isEmpty() {
         return size == 0;
@@ -124,22 +134,31 @@ public class DoubledLinkedListOfInteger {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
         }
-
-        Node current = head;
-        for (int i = 0; i < index; i++) {
-            current = current.next;
+    
+        Node current;
+        if (index >= size / 2) { 
+            current = tail;
+            for (int i = size - 1; i > index; i--) {
+                current = current.prev;
+            }
+        } else {
+            current = head;
+            for (int i = 0; i < index; i++) {
+                current = current.next;
+            }
         }
-
+    
         Integer oldValue = current.data;
         current.data = e;
         return oldValue;
     }
+    
 
     public int removeByIndex(int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
         }
-
+    
         if (index == 0) {
             Integer removedValue = head.data;
             head = head.next;
@@ -160,6 +179,16 @@ public class DoubledLinkedListOfInteger {
             }
             size--;
             return removedValue;
+        } else if (index >= size / 2) { 
+            Node current = tail;
+            for (int i = size - 1; i > index; i--) {
+                current = current.prev;
+            }
+            Integer removedValue = current.data;
+            current.prev.next = current.next;
+            current.next.prev = current.prev;
+            size--;
+            return removedValue;
         } else {
             Node current = head;
             for (int i = 0; i < index; i++) {
@@ -172,6 +201,7 @@ public class DoubledLinkedListOfInteger {
             return removedValue;
         }
     }
+    
 
     public boolean removeAll(Integer element) {
         boolean removed = false;
